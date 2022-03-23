@@ -1,5 +1,6 @@
 // use local storage to manage cart data
 const addToDb = id =>{
+    debugger
     let shoppingCart = {};
 
     //get the shopping cart from local storage
