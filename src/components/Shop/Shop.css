@@ -15,7 +15,7 @@
     background-color: rgba(255, 153, 0, 0.3);
 }
 
-.review-order-btn {
+.review-order-btn, .checkout-btn {
     border: 0;
     outline: 0;
     padding: 10px 20px;
