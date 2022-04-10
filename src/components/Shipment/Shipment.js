@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const Shipment = () => {
+    const [user] = useAuthState(auth);
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
+    const [phone, setPhone] = useState("");
     const [error, setError] = useState("");
-    // const navigate = useNavigate();
     const handleNameBlur = (event) => {
         setName(event.target.value);
     };
@@ -15,11 +18,13 @@ const Shipment = () => {
         setAddress(event.target.value);
     };
 
-    const handleCityBlur = (event) => {
-        setCity(event.target.value);
+    const handlePhoneBlur = (event) => {
+        setPhone(event.target.value);
     };
     const handleShipping = (event) => {
         event.preventDefault();
+        const shipping = {name, email, address, phone};
+        console.log(shipping);
     };
 
     return (
@@ -38,6 +43,17 @@ const Shipment = () => {
                         />
                     </div>
                     <div className="input-group-custom">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            value={user && user.email}
+                            readOnly
+                            type="email"
+                            name="email"
+                            id="email"
+                            required
+                        />
+                    </div>
+                    <div className="input-group-custom">
                         <label htmlFor="address">Address</label>
                         <input
                             onBlur={handleAddressBlur}
@@ -48,20 +64,17 @@ const Shipment = () => {
                         />
                     </div>
                     <div className="input-group-custom">
-                        <label htmlFor="city">
-                            City
-                        </label>
+                        <label htmlFor="Phone">Phone</label>
                         <input
-                            onBlur={handleCityBlur}
-                            type="text"
-                            name="city"
-                            id="city"
+                            onBlur={handlePhoneBlur}
+                            type="Number"
+                            name="Phone"
+                            id="Phone"
                             required
                         />
                     </div>
                     <p className="text-center text-danger">{error}</p>
-                    <p className="text-center text-danger">
-                    </p>
+                    <p className="text-center text-danger"></p>
                     <div className="text-center m-3">
                         <input
                             className="submit-btn"
