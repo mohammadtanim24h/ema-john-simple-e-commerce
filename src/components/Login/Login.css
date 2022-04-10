@@ -1,0 +1,57 @@
+.form-container {
+    width: 500px;
+    height: 400px;
+    border: 1px solid #95a0a7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+}
+
+.form-title {
+    color: #304958;
+    font-size: 35px;
+    margin-top: 25px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.input-group-custom {
+    margin-bottom: 15px;
+}
+
+.input-group-custom label {
+    display: block;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.input-group-custom input {
+    width: 415px;
+    height: 36px;
+    border: 1px solid #95a0a7;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.submit-btn {
+    background-color: rgba(255, 153, 0, 0.3);
+    width: 415px;
+    text-align: center;
+    outline: 0;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.form-link {
+    color: #FF9900;
+    text-decoration: none;
+}
+
+.new-account {
+    margin-top: 15px;
+}
