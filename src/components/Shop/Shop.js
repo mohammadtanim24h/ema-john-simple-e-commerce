@@ -30,10 +30,10 @@ const Shop = () => {
             .then((res) => res.json())
             .then((data) => {
                 const count = data.count;
-                const pages = Math.ceil(count / 10);
+                const pages = Math.ceil(count / size);
                 setPageCount(pages);
             });
-    }, []);
+    }, [size]);
 
     
 
@@ -81,6 +81,8 @@ const Shop = () => {
                         key={product._id}
                     ></Product>
                 ))}
+
+                {/* Pagination */}
                 <div
                     className="p-3 shadow rounded pagination"
                     style={{ height: "75px" }}
