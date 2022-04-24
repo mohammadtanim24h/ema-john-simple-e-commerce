@@ -10,7 +10,6 @@ import "./Shop.css";
 
 const Shop = () => {
     // const [products, setProducts] = useProducts();
-    
 
     const [cart, setCart] = useState([]);
     const [pageCount, setPageCount] = useState(0);
@@ -20,10 +19,9 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
         fetch(`http://localhost:5000/product?page=${activePage}&size=${size}`)
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [activePage, size])
-
+            .then((res) => res.json())
+            .then((data) => setProducts(data));
+    }, [activePage, size]);
 
     useEffect(() => {
         fetch("http://localhost:5000/productCount")
@@ -34,8 +32,6 @@ const Shop = () => {
                 setPageCount(pages);
             });
     }, [size]);
-
-    
 
     // get local storage cart
     useEffect(() => {
@@ -72,52 +68,58 @@ const Shop = () => {
         addToDb(selectedProduct._id);
     };
     return (
-        <div className="shop-container">
-            <div className="product-container">
-                {products.map((product) => (
-                    <Product
-                        product={product}
-                        handleAddToCart={handleAddToCart}
-                        key={product._id}
-                    ></Product>
-                ))}
-
-                {/* Pagination */}
-                <div
-                    className="p-3 shadow rounded pagination"
-                    style={{ height: "75px" }}
-                >
-                    {[...Array(pageCount).keys()].map((number) => (
-                        <button
-                            key={number}
-                            onClick={() => setActivePage(number)}
-                            className={`mx-1 ${
-                                activePage === number ? "selected" : ""
-                            }`}
-                        >
-                            {number}
-                        </button>
+        <div>
+            <div className="shop-container">
+                <div className="product-container">
+                    {products.map((product) => (
+                        <Product
+                            product={product}
+                            handleAddToCart={handleAddToCart}
+                            key={product._id}
+                        ></Product>
                     ))}
-
-                    <select onChange={e => setSize(e.target.value)} className="ms-2 form-select">
-                        <option value="5">5</option>
-                        <option value="10" selected>10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
+                </div>
+                <div className="cart-container">
+                    <Cart cart={cart}>
+                        <Link to="/orders">
+                            <button className="review-order-btn">
+                                Review Order
+                                <FontAwesomeIcon
+                                    icon={faArrowRight}
+                                ></FontAwesomeIcon>
+                            </button>
+                        </Link>
+                    </Cart>
                 </div>
             </div>
-            <div className="cart-container">
-                <Cart cart={cart}>
-                    <Link to="/orders">
-                        <button className="review-order-btn">
-                            Review Order
-                            <FontAwesomeIcon
-                                icon={faArrowRight}
-                            ></FontAwesomeIcon>
-                        </button>
-                    </Link>
-                </Cart>
+
+            {/* Pagination */}
+            <div
+                className="p-3 shadow rounded pagination w-50 mx-auto my-5"
+                style={{ height: "75px" }}
+            >
+                {[...Array(pageCount).keys()].map((number) => (
+                    <button
+                        key={number}
+                        onClick={() => setActivePage(number)}
+                        className={`mx-1 ${
+                            activePage === number ? "selected" : ""
+                        }`}
+                    >
+                        {number}
+                    </button>
+                ))}
+
+                <select
+                    onChange={(e) => setSize(e.target.value)}
+                    defaultValue="10"
+                    className="ms-2 form-select"
+                >
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
             </div>
         </div>
     );
